@@ -39,7 +39,7 @@ expressApp.get('/auth',function(req,res){
   console.log(req.query.client_id);
   console.log(req.query.redirect_uri);
   console.log(req.query.state);
-  res.redirect(req.query.redirect_uri+"?code=MINGKYME23&state=STATE_STRING");
+  res.redirect(req.query.redirect_uri+"?code=MINGKYME23&state="+req.query.state);
 });
 expressApp.post('/token',function(req,res){
   res.send({
