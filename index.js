@@ -5,6 +5,8 @@ const { smarthome } = require('actions-on-google')
 const app = smarthome()
 // Register handlers for Smart Home intents
 app.onSync((body, headers) => {
+  console.log("onSync");
+
     return {
       requestId: body.requestId,
       payload: {
@@ -14,7 +16,8 @@ app.onSync((body, headers) => {
     }
   })
   app.onQuery((body, headers) => {
-    return {
+  console.log("onQuery");
+  return {
       requestId: 'ff36...',
       payload: {
         // ...
@@ -22,6 +25,7 @@ app.onSync((body, headers) => {
     }
   })
 app.onExecute((body, headers) => {
+  console.log("onExecute");
   return {
     requestId: 'ff36...',
     payload: {
@@ -30,6 +34,7 @@ app.onExecute((body, headers) => {
   }
 })
 app.onDisconnect((body, headers) => {
+  console.log("onDisconnect");
   return {}
 })
 
@@ -42,6 +47,7 @@ expressApp.get('/auth',function(req,res){
   res.redirect(req.query.redirect_uri+"?code=MINGKYME23&state="+req.query.state);
 });
 expressApp.post('/token',function(req,res){
+  console.log("TOKEN");
   res.send({
     "token_type": "Bearer",
     "access_token": " ACCESS_TOKEN ",
