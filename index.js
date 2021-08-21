@@ -118,8 +118,25 @@ expressApp.get('/auth',function(req,res){
   console.log(req.query.client_id);
   console.log(req.query.redirect_uri);
   console.log(req.query.state);
-  console.log(req.query.redirect_uri+"?code=MINGKYME23&state="+req.query.state);
-  res.redirect(req.query.redirect_uri+"?code=MINGKYME23&state="+req.query.state);
+  // console.log(req.query.redirect_uri+"?code=MINGKYME23&state="+req.query.state);
+  // res.redirect(req.query.redirect_uri+"?code=MINGKYME23&state="+req.query.state);
+  res.redirect('/login?responseurl='+req.query.redirect_uri+"?code=MINGKYME23&state="+req.query.state);
+});
+expressApp.get('/login',function(req,res){
+  res.send(`
+  <html>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <body>
+        <form action="/login" method="post">
+          <input type="hidden"
+            name="responseurl" value="${req.query.responseurl}" />
+          <button type="submit" style="font-size:14pt">
+            Link this service to Google
+          </button>
+        </form>
+      </body>
+    </html>
+    `);
 });
 expressApp.post('/token',function(req,res){
   console.log("TOKEN");
@@ -128,9 +145,9 @@ expressApp.post('/token',function(req,res){
   console.log(req.body.state);
   res.send({
     "token_type": "Bearer",
-    "access_token": "ACCESS_TOKEN",
-    "refresh_token": "REFRESH_TOKEN",
-    "expires_in": 99999999999999
+    "access_token": "123access",
+    "refresh_token": "123refresh",
+    "expires_in": 86400
     });
 });
 expressApp.post('/fulfillment', app)
