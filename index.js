@@ -125,7 +125,7 @@ expressApp.get('/auth',function(req,res){
   // console.log(req.query.redirect_uri+"?code=MINGKYME23&state="+req.query.state);
   // res.redirect(req.query.redirect_uri+"?code=MINGKYME23&state="+req.query.state);
   let url = req.query.redirect_uri+"?code=MINGKYME23&state="+req.query.state;
-  res.redirect('/login?responseurl='+encodeURI(url));
+  res.redirect('/login?responseurl='+encodeURIComponent(url));
 });
 expressApp.get('/login',function(req,res){
   res.send(`
