@@ -143,6 +143,7 @@ expressApp.get('/login',function(req,res){
 expressApp.post('/login',function(req,res){
   // Here, you should validate the user account.
     // In this sample, we do not do that.
+    console.log(req.body);
     res.redirect(decodeURIComponent(req.body.responseurl));
 });
 expressApp.post('/token',function(req,res){
