@@ -36,9 +36,9 @@ app.onDisconnect((body, headers) => {
 const express = require('express');
 const expressApp = express().use(express.json())
 expressApp.get('/auth',function(req,res){
-  console.log(req.params.client_id);
-  console.log(req.params.redirect_uri);
-  console.log(req.params.state);
+  console.log(req.query.client_id);
+  console.log(req.query.redirect_uri);
+  console.log(req.query.state);
 });
 expressApp.post('/token',function(req,res){
   res.send({
