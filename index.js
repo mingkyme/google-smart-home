@@ -118,7 +118,7 @@ const expressApp = express();
 expressApp.use(express.json());
 expressApp.use(express.urlencoded({extended:true}));
 expressApp.use(function(req,res,next){
-  console.log(req);
+  //console.log(req);
   next();
 });
 expressApp.get('/auth',function(req,res){
