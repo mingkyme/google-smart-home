@@ -48,10 +48,14 @@ expressApp.get('/auth',function(req,res){
 });
 expressApp.post('/token',function(req,res){
   console.log("TOKEN");
+  console.log(req.body.client_id);
+  console.log(req.body.redirect_uri);
+  console.log(req.body.state);
   res.send({
     "token_type": "Bearer",
-    "access_token": " ACCESS_TOKEN ",
-    "expires_in": 99999999999
+    "access_token": "ACCESS_TOKEN",
+    "refresh_token": "REFRESH_TOKEN",
+    "expires_in": 99999999999999
     });
 });
 expressApp.post('/fulfillment', app)
