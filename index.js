@@ -114,7 +114,10 @@ app.onDisconnect((body, headers) => {
 })
 
 const express = require('express');
-const expressApp = express().use(express.json())
+const expressApp = express();
+expressApp.use(express.json());
+expressApp.use(express.urlencoded({extended:true}));
+
 expressApp.get('/auth',function(req,res){
   console.log(req.query.client_id);
   console.log(req.query.redirect_uri);
