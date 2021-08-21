@@ -35,5 +35,18 @@ app.onDisconnect((body, headers) => {
 
 const express = require('express');
 const expressApp = express().use(express.json())
-expressApp.listen(6182)
+expressApp.get('/auth',function(req,res){
+  console.log(req.params.client_id);
+  console.log(req.params.redirect_uri);
+  console.log(req.params.state);
+});
+expressApp.post('/token',function(req,res){
+  res.send({
+    "token_type": "Bearer",
+    "access_token": " ACCESS_TOKEN ",
+    "expires_in": 99999999999
+    });
+});
 expressApp.post('/fulfillment', app)
+
+expressApp.listen(6182)
