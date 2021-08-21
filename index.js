@@ -149,6 +149,10 @@ expressApp.post('/login',function(req,res){
     console.log(req.body);
     res.redirect(decodeURIComponent(req.body.responseurl));
 });
+expressApp.get('/token',function(req,res){
+  console.log(req);
+  console.log("test");
+});
 expressApp.post('/token',function(req,res){
   console.log("TOKEN");
   console.log(req.body.client_id);
