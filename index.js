@@ -1,89 +1,27 @@
-// Import the appropriate service
 const { smarthome } = require('actions-on-google');
-const exp = require('constants');
-
-// Create an app instance
-const app = smarthome()
-// Register handlers for Smart Home intents
+const app = smarthome();
 app.onSync((body, headers) => {
   console.log("onSync");
-
     return {
-      "requestId": "ff36a3cc-ec34-11e6-b1a0-64510650abcf",
+      "requestId": body.requestId,
       "payload": {
         "agentUserId": "1836.15267389",
         "devices": [
           {
             "id": "123",
-            "type": "action.devices.types.OUTLET",
+            "type": "action.devices.types.SWITCH",
             "traits": [
               "action.devices.traits.OnOff"
             ],
             "name": {
-              "defaultNames": [
-                "My Outlet 1234"
-              ],
-              "name": "Night light",
-              "nicknames": [
-                "wall plug"
-              ]
+              "name": "Simple switch"
             },
-            "willReportState": false,
-            "roomHint": "kitchen",
+            "willReportState": true,
             "deviceInfo": {
-              "manufacturer": "lights-out-inc",
+              "manufacturer": "smart-home-inc",
               "model": "hs1234",
               "hwVersion": "3.2",
               "swVersion": "11.4"
-            },
-            "otherDeviceIds": [
-              {
-                "deviceId": "local-device-id"
-              }
-            ],
-            "customData": {
-              "fooValue": 74,
-              "barValue": true,
-              "bazValue": "foo"
-            }
-          },
-          {
-            "id": "456",
-            "type": "action.devices.types.LIGHT",
-            "traits": [
-              "action.devices.traits.OnOff",
-              "action.devices.traits.Brightness",
-              "action.devices.traits.ColorSetting"
-            ],
-            "name": {
-              "defaultNames": [
-                "lights out inc. bulb A19 color hyperglow"
-              ],
-              "name": "lamp1",
-              "nicknames": [
-                "reading lamp"
-              ]
-            },
-            "willReportState": false,
-            "roomHint": "office",
-            "attributes": {
-              "colorModel": "rgb",
-              "colorTemperatureRange": {
-                "temperatureMinK": 2000,
-                "temperatureMaxK": 9000
-              },
-              "commandOnlyColorSetting": false
-            },
-            "deviceInfo": {
-              "manufacturer": "lights out inc.",
-              "model": "hg11",
-              "hwVersion": "1.2",
-              "swVersion": "5.4"
-            },
-            "customData": {
-              "fooValue": 12,
-              "barValue": false,
-              "bazValue": "bar"
             }
           }
         ]
@@ -93,19 +31,36 @@ app.onSync((body, headers) => {
   app.onQuery((body, headers) => {
   console.log("onQuery");
   return {
-      requestId: 'ff36...',
+      requestId: body.requestId,
       payload: {
-        // ...
+        "devices": {
+          "123": {
+            "status": "SUCCESS",
+            "online": true,
+            "on": true
+          }    
       },
     }
-  })
+  }
+})
 app.onExecute((body, headers) => {
   console.log("onExecute");
   return {
-    requestId: 'ff36...',
+    requestId: body.requestId,
     payload: {
-      // ...
-    },
+      "commands": [
+        {
+          "ids": [
+            "123"
+          ],
+          "status": "SUCCESS",
+          "states": {
+            "online": true,
+            "on": true
+          }
+        }
+      ]
+    }
   }
 })
 app.onDisconnect((body, headers) => {
