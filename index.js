@@ -5,7 +5,7 @@ app.onSync((body, headers) => {
     return {
       "requestId": body.requestId,
       "payload": {
-        "agentUserId": "1836.15267389",
+        "agentUserId": "YOUR_ID",
         "devices": [
           {
             "id": "123",
@@ -19,9 +19,7 @@ app.onSync((body, headers) => {
             "willReportState": true,
             "deviceInfo": {
               "manufacturer": "smart-home-inc",
-              "model": "hs1234",
-              "hwVersion": "3.2",
-              "swVersion": "11.4"
+              "model": "hs1234"
             }
           }
         ]
