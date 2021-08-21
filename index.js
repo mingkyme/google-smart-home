@@ -1,5 +1,6 @@
 // Import the appropriate service
-const { smarthome } = require('actions-on-google')
+const { smarthome } = require('actions-on-google');
+const exp = require('constants');
 
 // Create an app instance
 const app = smarthome()
@@ -137,6 +138,11 @@ expressApp.get('/login',function(req,res){
       </body>
     </html>
     `);
+});
+expressApp.post('/login',function(req,res){
+  // Here, you should validate the user account.
+    // In this sample, we do not do that.
+    res.redirect(req.body.responseurl);
 });
 expressApp.post('/token',function(req,res){
   console.log("TOKEN");
