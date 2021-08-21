@@ -118,7 +118,7 @@ const expressApp = express();
 expressApp.use(express.json());
 expressApp.use(express.urlencoded({extended:true}));
 expressApp.use(function(req,res,next){
-  //console.log(req);
+  console.log(req.url);
   next();
 });
 expressApp.get('/auth',function(req,res){
@@ -158,22 +158,6 @@ expressApp.get('/token',function(req,res){
 });
 expressApp.post('/token',function(req,res){
   console.log("TOKEN");
-  console.log(req.body.client_id);
-  console.log(req.body.redirect_uri);
-  console.log(req.body.state);
-  res.send({
-    "token_type": "Bearer",
-    "access_token": "123access",
-    "refresh_token": "123refresh",
-    "expires_in": 86400
-    });
-});
-expressApp.get('/faketoken',function(req,res){
-  console.log(req);
-  console.log("test2");
-});
-expressApp.post('/faketoken',function(req,res){
-  console.log("TOKEN2");
   console.log(req.body.client_id);
   console.log(req.body.redirect_uri);
   console.log(req.body.state);
