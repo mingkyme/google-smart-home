@@ -121,7 +121,8 @@ expressApp.get('/auth',function(req,res){
   console.log(req.query.state);
   // console.log(req.query.redirect_uri+"?code=MINGKYME23&state="+req.query.state);
   // res.redirect(req.query.redirect_uri+"?code=MINGKYME23&state="+req.query.state);
-  res.redirect('/login?responseurl='+req.query.redirect_uri+"?code=MINGKYME23&state="+req.query.state);
+  let url = req.query.redirect_uri+"?code=MINGKYME23&state="+req.query.state;
+  res.redirect('/login?responseurl='+encodeURI(url));
 });
 expressApp.get('/login',function(req,res){
   res.send(`
@@ -142,7 +143,7 @@ expressApp.get('/login',function(req,res){
 expressApp.post('/login',function(req,res){
   // Here, you should validate the user account.
     // In this sample, we do not do that.
-    res.redirect(req.body.responseurl);
+    res.redirect(decodeURIComponent(req.body.responseurl));
 });
 expressApp.post('/token',function(req,res){
   console.log("TOKEN");
